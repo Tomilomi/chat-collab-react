@@ -1,23 +1,36 @@
+export default function MessageBubble({ message, currentUserId }) {
+    const isOwn = message.sender.id === currentUserId;
 
-function MessageBubble({ message, currentUserId }) {
-    const isOwn = message.sender.id === currentUserId
+    const formatTime = (timestamp) => {
+        return new Date(timestamp).toLocaleTimeString('es-AR', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    };
 
-    return (
-        <div className={`message-bubble ${isOwn ? 'user' : 'other'}`}>
-
-            <div className={`bublename ${isOwn ? 'user-name' : 'other-name'}`}>
-                {message.sender.username}
-            </div>
-            <div className={`bubble ${isOwn ? 'user-bubble' : 'other-bubble'}`}>
-                {message.content}
-            </div>
-            <div className={`bubbletimestamp ${isOwn ? 'user-timestamp' : 'other-timestamp'}`}>
-                {message.timestamp}
-            </div>
+    const Avatar = () => (
+        <div className="flex flex-col items-center">
+            <img
+                src={`https://api.dicebear.com/7.x/pixel-art/svg?seed=${message.sender.username}`}
+                alt="avatar"
+                className="w-8 h-8"
+            />
+            <span className="text-xs mt-1">{message.sender.username}</span>
         </div>
     );
-};
-// ver bien los dto 
-// formatear el timestamp
-export default MessageBubble;
 
+    return (
+        <div className={`flex items-end gap-2 ${isOwn ? 'justify-end' : 'justify-start'}`}>
+
+            {!isOwn && <Avatar />}
+
+            <div className={`nes-balloon ${isOwn ? 'from-right' : 'from-left'} is-dark`}>
+                <p className="nes-text text-black">{message.content}</p>
+                <span className="text-xs text-gray-400">{formatTime(message.timestamp)}</span>
+            </div>
+
+            {isOwn && <Avatar />}
+
+        </div>
+    );
+}
