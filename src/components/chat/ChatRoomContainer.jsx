@@ -12,9 +12,9 @@ export default function ChatRoomContainer() {
     }
 
     useEffect(() => {
-        chatService.startConnection()
         chatService.onLoadMessages((msg) => setMessages(msg))
         chatService.onReceiveMessage((msg) => setMessages((prev) => [...prev, msg]))
+        chatService.startConnection()
     }, []);
 
     return (
