@@ -1,18 +1,17 @@
+import MessageBubble from './MessageBubble';
 
-import MessageBubble from './MessageBubble'
-
-const MessageList = ({ messages = [], currentUserId }) => {
+export default function MessageList({ messages, currentUserId }) {
     return (
-        <div className="message-list">
-            {messages.map((m) => (
-                <MessageBubble
+        <div className="flex flex-col">
+            {messages.map((m, index) => (
+                <div
                     key={m.id}
-                    message={m}
-                    currentUserId={currentUserId}
-                />
+                    style={{ backgroundColor: index % 2 === 0 ? 'transparent' : 'rgba(0,0,0,0.15)' }}
+                    className="p-2 rounded"
+                >
+                    <MessageBubble message={m} currentUserId={currentUserId} />
+                </div>
             ))}
         </div>
-    )
+    );
 }
-
-export default MessageList
