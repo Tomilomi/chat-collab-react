@@ -1,31 +1,39 @@
-import { useState, useEffect } from 'react';
-import ChatRoom from './ChatRoom';
-import * as chatService from '../../services/chatService';
+import { useState, useEffect } from "react";
+import ChatRoom from "./ChatRoom";
+import * as chatService from "../../services/chatService";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function ChatRoomContainer() {
-    const [messages, setMessages] = useState([])
-    const [inputValue, setInputValue] = useState("")
+  const [messages, setMessages] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const { user, token } = useAuth();
 
-    const handleSend = () => {
-        chatService.sendMessage(inputValue)
-        setInputValue("")
-    }
+  const handleSend = () => {
+    chatService.sendMessage(inputValue);
+    setInputValue("");
+  };
 
-    useEffect(() => {
-        chatService.onLoadMessages((msg) => setMessages(msg))
-        chatService.onReceiveMessage((msg) => setMessages((prev) => [...prev, msg]))
-        chatService.startConnection()
-    }, []);
+  useEffect(() => {
+    if (!token) return;
 
-    return (
-        <>
-            <ChatRoom
-                messages={messages}
-                currentUserId={"me"} // cambiar esto despues para cuando llegue el usuario
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onSend={handleSend}
-            />
-        </>
-    )
+    chatService.startConnection(
+      token,
+      (msgs) => setMessages(msgs),
+      (msg) => setMessages((prev) => [...prev, msg]),
+    );
+
+    return () => {
+      chatService.stopConnection();
+    };
+  }, [token]);
+
+  return (
+    <ChatRoom
+      messages={messages}
+      currentUserId={user?.id}
+      value={inputValue}
+      onChange={(e) => setInputValue(e.target.value)}
+      onSend={handleSend}
+    />
+  );
 }

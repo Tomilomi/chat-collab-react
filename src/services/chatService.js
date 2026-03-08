@@ -1,25 +1,34 @@
 import * as signalR from '@microsoft/signalr';
 
-const connection = new signalR.HubConnectionBuilder()
-    .withUrl("http://localhost:5135/chatHub")
-    .build();
+let connection = null;
 
-export const startConnection = () => {
-    if (connection.state === signalR.HubConnectionState.Disconnected) {
-        return connection.start().then(() => {
-            connection.invoke("LoadMessages")
+export const startConnection = (token, onLoadMessages, onReceiveMessage) => {
+    if (connection) return;
+
+    connection = new signalR.HubConnectionBuilder()
+        .withUrl('http://localhost:5135/chathub', {
+            accessTokenFactory: () => token
+        })
+        .build();
+
+    connection.on('LoadMessages', onLoadMessages);
+    connection.on('ReceiveMessage', onReceiveMessage);
+
+    return connection.start()
+        .then(() => {
+            if (connection.state === signalR.HubConnectionState.Connected) {
+                connection.invoke('LoadMessages', 0);
+            }
         });
+};
+
+export const stopConnection = () => {
+    if (connection) {
+        connection.stop();
+        connection = null;
     }
 };
 
-export const onReceiveMessage = (callback) => {
-    connection.on("ReceiveMessage", callback);
-};
-
-export const onLoadMessages = (callback) => {
-    connection.on("LoadMessages", callback);
-};
-
 export const sendMessage = (content) => {
-    connection.invoke("SendMessage", { content });
+    connection.invoke('SendMessage', { content });
 };

@@ -7,22 +7,15 @@ export default function MessageInput({ value, onChange, onSend }) {
     };
 
     return (
-        <div className="nes-field flex gap-2 p-2 rounded-lg">
+        <div>
             <input
                 type="text"
                 value={value}
                 onChange={onChange}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
-                className="nes-input flex-1"
             />
-            <button
-                type="button"
-                onClick={onSend}
-                className="nes-btn is-primary"
-            >
-                Send
-            </button>
+            <button onClick={onSend}>Send</button>
         </div>
     );
 }
