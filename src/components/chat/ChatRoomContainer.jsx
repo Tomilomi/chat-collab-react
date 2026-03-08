@@ -1,39 +1,69 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import ChatRoom from "./ChatRoom";
 import * as chatService from "../../services/chatService";
 import { useAuth } from "../../hooks/useAuth";
 
 export default function ChatRoomContainer() {
-  const [messages, setMessages] = useState([]);
-  const [inputValue, setInputValue] = useState("");
-  const { user, token } = useAuth();
+    const [messages, setMessages] = useState([]);
+    const [inputValue, setInputValue] = useState("");
+    const [connectedUsers, setConnectedUsers] = useState([]);
+    const [typingUsers, setTypingUsers] = useState([]);
+    const { user, token, logout } = useAuth();
+    const isTyping = useRef(false);
+    const navigate = useNavigate();
 
-  const handleSend = () => {
-    chatService.sendMessage(inputValue);
-    setInputValue("");
-  };
-
-  useEffect(() => {
-    if (!token) return;
-
-    chatService.startConnection(
-      token,
-      (msgs) => setMessages(msgs),
-      (msg) => setMessages((prev) => [...prev, msg]),
-    );
-
-    return () => {
-      chatService.stopConnection();
+    const handleSend = () => {
+        chatService.sendMessage(inputValue);
+        chatService.stopTyping();
+        isTyping.current = false;
+        setInputValue("");
     };
-  }, [token]);
 
-  return (
-    <ChatRoom
-      messages={messages}
-      currentUserId={user?.id}
-      value={inputValue}
-      onChange={(e) => setInputValue(e.target.value)}
-      onSend={handleSend}
-    />
-  );
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
+        if (e.target.value && !isTyping.current) {
+            isTyping.current = true;
+            chatService.startTyping();
+        } else if (!e.target.value) {
+            isTyping.current = false;
+            chatService.stopTyping();
+        }
+    };
+
+    const handleLogout = () => {
+        chatService.stopConnection();
+        logout();
+        navigate('/login');
+    };
+
+    useEffect(() => {
+        if (!token) return;
+
+        chatService.startConnection(
+            token,
+            (msgs) => setMessages(msgs),
+            (msg) => setMessages((prev) => [...prev, msg]),
+            (users) => setConnectedUsers(users),
+            (username) => setTypingUsers((prev) => [...prev, username]),
+            (username) => setTypingUsers((prev) => prev.filter((u) => u !== username))
+        );
+
+        return () => {
+            chatService.stopConnection();
+        };
+    }, [token]);
+
+    return (
+        <ChatRoom
+            messages={messages}
+            currentUserId={user?.id}
+            value={inputValue}
+            onChange={handleInputChange}
+            onSend={handleSend}
+            connectedUsers={connectedUsers}
+            typingUsers={typingUsers}
+            onLogout={handleLogout}
+        />
+    );
 }
