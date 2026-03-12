@@ -7,3 +7,15 @@ export const getMe = (token) => {
         headers: { Authorization: `Bearer ${token}` }
     });
 };
+
+export const getProfiles = (token) => {
+    return axios.get(`${BASE_URL}/profiles`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+};
+
+export const banUser = (userId, token) => {
+    return axios.post(`${BASE_URL}/${userId}/ban`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+};

@@ -2,7 +2,7 @@ import * as signalR from '@microsoft/signalr';
 
 let connection = null;
 
-export const startConnection = (token, onLoadMessages, onReceiveMessage, onUpdateConnectedUsers, onUserTyping, onUserStoppedTyping) => {
+export const startConnection = (token, onLoadMessages, onReceiveMessage, onUpdateConnectedUsers, onUserTyping, onUserStoppedTyping, onKicked) => {
     if (connection) return;
 
     connection = new signalR.HubConnectionBuilder()
@@ -16,6 +16,7 @@ export const startConnection = (token, onLoadMessages, onReceiveMessage, onUpdat
     connection.on('UpdateConnectedUsers', onUpdateConnectedUsers);
     connection.on('UserTyping', onUserTyping);
     connection.on('UserStoppedTyping', onUserStoppedTyping);
+    connection.on('Kicked', onKicked);
 
     return connection.start()
         .then(() => {
@@ -47,3 +48,4 @@ export const startTyping = () => {
 export const stopTyping = () => {
     connection.invoke('StopTyping');
 };
+

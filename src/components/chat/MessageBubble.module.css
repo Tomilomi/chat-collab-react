@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* ── CONTAINER ── */
+.container {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    padding: 8px 4px;
+}
+
+.own {
+    flex-direction: row-reverse;
+}
+
+.other {
+    flex-direction: row;
+}
+
+/* ── AVATAR ── */
+.avatar {
+    width: 48px;
+    height: 48px;
+    image-rendering: pixelated;
+    flex-shrink: 0;
+}
+
+/* ── BUBBLE ── */
+.bubble {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border: 3px dashed #a78bfa;
+    padding: 10px 14px;
+    position: relative;
+    background-color: #1e1030;
+    max-width: 60%;
+}
+
+/* ── ARROW ── */
+@keyframes arrowPulse {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50%       { transform: translateY(-50%) translateX(4px); }
+}
+
+.bubble::before {
+    content: '>';
+    position: absolute;
+    left: -36px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a78bfa;
+    font-size: 20px;
+    font-family: 'Press Start 2P', monospace;
+    animation: arrowPulse 1.2s ease-in-out infinite;
+}
+
+.own .bubble::before {
+    content: '<';
+    left: auto;
+    right: -36px;
+}
+
+/* ── TYPOGRAPHY ── */
+.username {
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    color: #c084fc;
+}
+
+.content {
+    font-family: 'Departure Mono', monospace;
+    font-size: 16px;
+    color: #e2e8f0;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.timestamp {
+    font-family: 'Departure Mono', monospace;
+    font-size: 11px;
+    color: #6b7280;
+    align-self: flex-end;
+}
