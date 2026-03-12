@@ -3,7 +3,7 @@ import MessageInput from './MessageInput';
 import UserList from './UserList';
 import TypingIndicator from './TypingIndicator';
 
-export default function ChatRoom({ messages, currentUserId, value, onChange, onSend, connectedUsers, typingUsers, onLogout }) {
+export default function ChatRoom({ messages, currentUserId, value, onChange, onSend, connectedUsers, typingUsers, onLogout, onUserClick }) {
     return (
         <div>
             <div>
@@ -11,7 +11,7 @@ export default function ChatRoom({ messages, currentUserId, value, onChange, onS
                 <button onClick={onLogout}>Logout</button>
             </div>
             <div>
-                <MessageList messages={messages} currentUserId={currentUserId} />
+                <MessageList messages={messages} currentUserId={currentUserId} onUserClick={onUserClick} />
                 <UserList connectedUsers={connectedUsers} />
             </div>
             <TypingIndicator typingUsers={typingUsers} />

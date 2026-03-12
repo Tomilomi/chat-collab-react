@@ -1,0 +1,224 @@
+.page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #6b5de8;
+    position: relative;
+}
+
+.canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+/* ── NOTA FLOTANTE ── */
+.note {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 200px;
+    background: #1a0f2e;
+    border: 2px solid #a78bfa;
+    z-index: 1;
+    animation: noteIn 0.4s ease;
+}
+
+@keyframes noteIn {
+    from { transform: translateY(16px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+.noteTitlebar {
+    background: #a78bfa;
+    padding: 4px 8px;
+}
+
+.noteTitlebarText {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+    color: #1a0f2e;
+}
+
+.noteBody {
+    padding: 12px;
+}
+
+.noteQuote {
+    font-family: 'VT323', monospace;
+    font-size: 16px;
+    color: #e2c4ff;
+    line-height: 1.4;
+    margin: 0;
+    min-height: 60px;
+}
+
+/* ── TERMINAL ── */
+.terminal {
+    background: #1a0f2e;
+    border: 3px solid #a78bfa;
+    outline: 1px solid #a78bfa;
+    outline-offset: 3px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+.titlebar {
+    background: #a78bfa;
+    padding: 5px 10px;
+}
+
+.titlebarText {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: #1a0f2e;
+}
+
+.body {
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ── FIELD ── */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: #a78bfa;
+}
+
+.label::before {
+    content: '> ';
+}
+
+.input {
+    font-family: 'Departure Mono', monospace;
+    font-size: 13px;
+    background: #0d0820;
+    border: 2px solid #3b2d6b;
+    color: #e2c4ff;
+    padding: 8px 10px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input:focus {
+    border-color: #a78bfa;
+}
+
+/* ── DIVIDER ── */
+.divider {
+    border: none;
+    border-top: 1px dashed #3b2d6b;
+    margin: 0;
+}
+
+/* ── BUTTON ── */
+.btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    background: transparent;
+    border: 2px solid #a78bfa;
+    color: #a78bfa;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.1s;
+}
+
+.btn:hover {
+    background: #a78bfa;
+    color: #1a0f2e;
+}
+
+/* ── LINK ── */
+.link {
+    font-family: 'Departure Mono', monospace;
+    font-size: 11px;
+    color: #6b5d9e;
+    text-align: center;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #a78bfa;
+}
+
+/* ── KICKED MODAL ── */
+.kickedOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.kickedModal {
+    background: #1a0f2e;
+    border: 3px solid #f87171;
+    outline: 1px solid #f87171;
+    outline-offset: 3px;
+    width: 280px;
+}
+
+.kickedTitlebar {
+    background: #f87171;
+    padding: 5px 10px;
+}
+
+.kickedTitlebarText {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: #1a0f2e;
+}
+
+.kickedBody {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+}
+
+.kickedReason {
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    color: #e2c4ff;
+    text-align: center;
+}
+
+.kickedBtn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    background: transparent;
+    border: 2px solid #f87171;
+    color: #f87171;
+    padding: 9px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.1s;
+}
+
+.kickedBtn:hover {
+    background: #f87171;
+    color: #1a0f2e;
+}

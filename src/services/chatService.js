@@ -49,3 +49,7 @@ export const stopTyping = () => {
     connection.invoke('StopTyping');
 };
 
+export const kickUser = (userId) => {
+    connection.invoke('KickUser', userId);
+};
+

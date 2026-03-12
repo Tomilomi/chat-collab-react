@@ -1,0 +1,182 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ── MODAL ── */
+.modal {
+    background: #1a0f2e;
+    border: 3px solid #a78bfa;
+    outline: 1px solid #a78bfa;
+    outline-offset: 3px;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    animation: slideUp 0.15s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(8px); opacity: 0; }
+    to   { transform: translateY(0);   opacity: 1; }
+}
+
+/* ── TITLEBAR ── */
+.titlebar {
+    background: #a78bfa;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.titlebarText {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: #1a0f2e;
+    flex: 1;
+}
+
+.titlebarDots {
+    display: flex;
+    gap: 4px;
+}
+
+.titlebarDots span {
+    width: 8px;
+    height: 8px;
+    border: 1px solid #1a0f2e;
+    display: block;
+}
+
+/* ── BODY ── */
+.body {
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ── AVATAR ── */
+.avatarWrapper {
+    border: 2px solid #a78bfa;
+    padding: 3px;
+    background: #0d0820;
+}
+
+.avatar {
+    width: 64px;
+    height: 64px;
+    image-rendering: pixelated;
+    display: block;
+}
+
+/* ── USERNAME ── */
+.username {
+    font-family: 'VT323', monospace;
+    font-size: 26px;
+    color: #e2c4ff;
+    letter-spacing: 0.05em;
+}
+
+.username::after {
+    content: '_';
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
+
+/* ── DIVIDER ── */
+.divider {
+    width: 100%;
+    border: none;
+    border-top: 1px dashed #3b2d6b;
+    margin: 0;
+}
+
+/* ── BUTTONS ── */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.btnKick {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    background: transparent;
+    border: 2px solid #fbbf24;
+    color: #fbbf24;
+    padding: 9px 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: background 0.1s;
+}
+
+.btnKick::before { content: '> '; }
+
+.btnKick:hover {
+    background: #fbbf24;
+    color: #1a0f2e;
+}
+
+.btnBan {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    background: transparent;
+    border: 2px solid #f87171;
+    color: #f87171;
+    padding: 9px 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: background 0.1s;
+}
+
+.btnBan::before { content: '> '; }
+
+.btnBan:hover {
+    background: #f87171;
+    color: #1a0f2e;
+}
+
+.btnClose {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    background: transparent;
+    border: 2px solid #3b2d6b;
+    color: #6b5d9e;
+    padding: 9px 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: all 0.1s;
+}
+
+.btnClose::before { content: '> '; }
+
+.btnClose:hover {
+    border-color: #a78bfa;
+    color: #a78bfa;
+}
