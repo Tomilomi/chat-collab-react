@@ -99,7 +99,7 @@ export default function Login() {
   const handleSubmit = async () => {
     try {
       const response = await authService.login(username, password);
-      const token = response.data;
+      const token = response.data.token;
       const me = await userService.getMe(token);
       login(token, me.data);
       navigate("/chat");

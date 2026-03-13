@@ -1,0 +1,74 @@
+.wrapper {
+    width: 160px;
+    height: 100%;
+    background: #1a0f2e;
+    border-left: 2px solid #3b2d6b;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.titlebar {
+    background: #a78bfa;
+    padding: 5px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.titlebarText {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: #1a0f2e;
+}
+
+.toggle {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    color: #1a0f2e;
+}
+
+.list {
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: #4ade80;
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+}
+
+.username {
+    font-family: 'Departure Mono', monospace;
+    font-size: 12px;
+    color: #e2c4ff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.collapsed {
+    width: 160px;
+    height: auto;
+}

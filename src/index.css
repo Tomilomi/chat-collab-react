@@ -2,6 +2,7 @@
 @import "tailwindcss";
 @import "nes.css/css/nes.min.css";
 
+
 @font-face {
     font-family: 'Departure Mono';
     src: url('./assets/fonts/DepartureMono-Regular.woff2') format('woff2');
@@ -14,3 +15,4 @@
 body {
     background-color: #6b5de8;
 }
+

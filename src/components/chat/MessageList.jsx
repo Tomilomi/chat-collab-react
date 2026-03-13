@@ -1,8 +1,9 @@
 import MessageBubble from './MessageBubble';
+import styles from './MessageList.module.css';
 
 export default function MessageList({ messages, currentUserId, onUserClick }) {
     return (
-        <div>
+        <div className={styles.list}>
             {messages.map((m) => (
                 <MessageBubble
                     key={m.id}

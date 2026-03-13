@@ -1,3 +1,5 @@
+import styles from './MessageInput.module.css';
+
 export default function MessageInput({ value, onChange, onSend }) {
     const handleKeyPress = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -7,15 +9,16 @@ export default function MessageInput({ value, onChange, onSend }) {
     };
 
     return (
-        <div>
+        <div className={styles.wrapper}>
             <input
+                className={styles.input}
                 type="text"
                 value={value}
                 onChange={onChange}
                 onKeyPress={handleKeyPress}
-                placeholder="Type your message..."
+                placeholder="> type your message..."
             />
-            <button onClick={onSend}>Send</button>
+            <button className={styles.btn} onClick={onSend}>Send</button>
         </div>
     );
 }
