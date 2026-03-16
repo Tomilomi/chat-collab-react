@@ -21,7 +21,7 @@ export const banUser = (userId, token) => {
 };
 
 export const updateMe = (data, token) => {
-    return axios.put(`${BASE_URL}/me`, data, {
+    return axios.patch(`${BASE_URL}/me`, data, {
         headers: { Authorization: `Bearer ${token}` }
     });
 };

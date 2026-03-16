@@ -1,17 +1,17 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ChatRoom from "./ChatRoom";
 import UserProfileModal from "./UserProfileModal";
 import * as chatService from "../../services/chatService";
 import { useAuth } from "../../hooks/useAuth";
+import { useSignalR } from "../../hooks/useSignalR";
+import { useState } from "react";
 
 export default function ChatRoomContainer() {
-    const [messages, setMessages] = useState([]);
+    const { messages, connectedUsers, typingUsers } = useSignalR();
     const [inputValue, setInputValue] = useState("");
-    const [connectedUsers, setConnectedUsers] = useState([]);
-    const [typingUsers, setTypingUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
-    const { user, token, logout } = useAuth();
+    const { user, logout } = useAuth();
     const isTyping = useRef(false);
     const navigate = useNavigate();
 
@@ -42,15 +42,6 @@ export default function ChatRoomContainer() {
         navigate("/login");
     };
 
-    const handleKicked = useCallback(
-        (reason) => {
-            chatService.stopConnection();
-            logout();
-            navigate(`/login?kicked=${encodeURIComponent(reason)}`);
-        },
-        [logout, navigate],
-    );
-
     const handleUserClick = (userData) => {
         setSelectedUser(userData);
     };
@@ -58,32 +49,6 @@ export default function ChatRoomContainer() {
     const handleCloseModal = () => {
         setSelectedUser(null);
     };
-
-    useEffect(() => {
-        if (!token) return;
-        chatService.startConnection(
-            token,
-            (msgs) => setMessages(msgs),
-            (msg) => setMessages((prev) => [...prev, msg]),
-            (users) => setConnectedUsers(users),
-            (username) => setTypingUsers((prev) =>
-                prev.includes(username) ? prev : [...prev, username]
-            ),
-            (username) => setTypingUsers((prev) => prev.filter((u) => u !== username)),
-            handleKicked,
-            (messageId) => {
-                setMessages((prev) =>
-                    prev.map((m) => m.id === messageId ? { ...m, deleting: true } : m)
-                );
-                setTimeout(() => {
-                    setMessages((prev) => prev.filter((m) => m.id !== messageId));
-                }, 600);
-            },
-        );
-        return () => {
-            chatService.stopConnection();
-        };
-    }, [token, handleKicked]);
 
     return (
         <>
