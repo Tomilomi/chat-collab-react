@@ -81,3 +81,45 @@
     color: #6b7280;
     align-self: flex-end;
 }
+
+/* ── DELETE MESSAGE ── */
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.deleteBtn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 15px;
+    font-weight: bolder;
+    background: transparent;
+    border: none;
+    color: #f87171;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.deleteBtn:hover {
+    color: #ef4444;
+}
+
+
+
+.deleting {
+    animation: glitch 0.6s forwards;
+}
+
+@keyframes glitch {
+    0%   { transform: translateX(0); opacity: 1; filter: none; }
+    15%  { transform: translateX(-4px); filter: hue-rotate(90deg) brightness(2); }
+    30%  { transform: translateX(4px); opacity: 0.8; filter: hue-rotate(180deg); }
+    45%  { transform: translateX(-6px) skewX(10deg); filter: brightness(3); }
+    60%  { transform: translateX(6px) skewX(-10deg); opacity: 0.4; filter: hue-rotate(270deg); }
+    75%  { transform: translateX(-2px); filter: brightness(0.5); }
+    90%  { transform: translateX(2px); opacity: 0.1; filter: invert(1); }
+    100% { transform: translateX(0); opacity: 0; filter: none; }
+}

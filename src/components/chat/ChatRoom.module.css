@@ -23,6 +23,27 @@
     color: #a78bfa;
 }
 
+.headerButtons {
+    display: flex;
+    gap: 8px;
+}
+
+.btnProfile {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    background: transparent;
+    border: 2px solid #a78bfa;
+    color: #a78bfa;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.btnProfile:hover {
+    background: #a78bfa;
+    color: #1a0f2e;
+}
+
 .btnLogout {
     font-family: 'Press Start 2P', monospace;
     font-size: 7px;
@@ -58,4 +79,6 @@
 .sidebar {
     position: relative;
     flex-shrink: 0;
+    height: 100%;
+    display: flex;
 }

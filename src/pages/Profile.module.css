@@ -1,0 +1,156 @@
+.page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #6b5de8;
+    position: relative;
+}
+
+.terminal {
+    background: #1a0f2e;
+    border: 3px solid #a78bfa;
+    outline: 1px solid #a78bfa;
+    outline-offset: 3px;
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+.titlebar {
+    background: #a78bfa;
+    padding: 5px 10px;
+}
+
+.titlebarText {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: #1a0f2e;
+}
+
+.body {
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: #a78bfa;
+}
+
+.label::before {
+    content: '> ';
+}
+
+.input {
+    font-family: 'Departure Mono', monospace;
+    font-size: 13px;
+    background: #0d0820;
+    border: 2px solid #3b2d6b;
+    color: #e2c4ff;
+    padding: 8px 10px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input:focus {
+    border-color: #a78bfa;
+}
+
+.divider {
+    border: none;
+    border-top: 1px dashed #3b2d6b;
+    margin: 0;
+}
+
+.avatarGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.avatarOption {
+    border: 2px solid #3b2d6b;
+    padding: 4px;
+    cursor: pointer;
+    background: #0d0820;
+    transition: border-color 0.1s;
+}
+
+.avatarOption:hover {
+    border-color: #a78bfa;
+}
+
+.avatarOption.selected {
+    border-color: #a78bfa;
+    background: #2d1b4e;
+}
+
+.avatarOption img {
+    width: 100%;
+    image-rendering: pixelated;
+    display: block;
+}
+
+.btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    background: transparent;
+    border: 2px solid #a78bfa;
+    color: #a78bfa;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.1s;
+}
+
+.btn:hover {
+    background: #a78bfa;
+    color: #1a0f2e;
+}
+
+.link {
+    font-family: 'Departure Mono', monospace;
+    font-size: 11px;
+    color: #6b5d9e;
+    text-align: center;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #a78bfa;
+}
+
+.success {
+    font-family: 'Departure Mono', monospace;
+    font-size: 11px;
+    color: #4ade80;
+    text-align: center;
+}
+
+.success::before {
+    content: '> ';
+}
+
+.error {
+    font-family: 'Departure Mono', monospace;
+    font-size: 11px;
+    color: #f87171;
+    text-align: center;
+}
+
+.error::before {
+    content: '> ';
+}
