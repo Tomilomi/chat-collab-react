@@ -2,8 +2,8 @@ import { useState } from "react";
 import styles from "./MessageBubble.module.css";
 import * as messageService from "../../services/messageService";
 import { useAuth } from "../../hooks/useAuth";
+import { BASE_URL } from "../../config";
 
-const BASE_URL = "http://localhost:5135";
 
 const formatTime = (timestamp) => {
   return new Date(timestamp).toLocaleTimeString("es-AR", {

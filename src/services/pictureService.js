@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { BASE_URL } from '../config';
 
-const BASE_URL = 'http://localhost:5135/api/picture';
+const API_URL = `${BASE_URL}/api/picture`;
 
 export const getPictures = (token) => {
-    return axios.get(BASE_URL, {
+    return axios.get(API_URL, {
         headers: { Authorization: `Bearer ${token}` }
     });
 };

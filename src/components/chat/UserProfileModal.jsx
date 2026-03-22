@@ -3,12 +3,13 @@ import * as userService from "../../services/userService";
 import * as chatService from "../../services/chatService";
 import { useAuth } from "../../hooks/useAuth";
 import styles from "./UserProfileModal.module.css";
+import { BASE_URL } from "../../config";
 
 Modal.setAppElement("#root");
 
 export default function UserProfileModal({ username, pictureUrl, userId, isOpen, onClose, canBan }) {
     const { token } = useAuth();
-    const BASE_URL = "http://localhost:5135";
+
 
     const handleBan = async () => {
         await userService.banUser(userId, token);

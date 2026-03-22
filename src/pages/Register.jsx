@@ -6,6 +6,7 @@ import styles from "./Login.module.css";
 export default function Register() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const navigate = useNavigate();
     const canvasRef = useRef(null);
 
@@ -54,17 +55,17 @@ export default function Register() {
 
     const handleSubmit = async () => {
         try {
+            setError("");
             await authService.register(username, password);
             navigate("/login");
-        } catch (error) {
-            console.log("error:", error);
+        } catch {
+            setError("Registration failed. Username may already be taken.");
         }
     };
 
     return (
         <div className={styles.page}>
             <canvas ref={canvasRef} className={styles.canvas} />
-
             <div className={styles.terminal}>
                 <div className={styles.titlebar}>
                     <span className={styles.titlebarText}>REGISTER</span>
@@ -89,6 +90,7 @@ export default function Register() {
                         />
                     </div>
                     <hr className={styles.divider} />
+                    {error && <p className={styles.error}>{error}</p>}
                     <button className={styles.btn} onClick={handleSubmit}>Register</button>
                     <Link to="/login" className={styles.link}>already have an account? login</Link>
                 </div>

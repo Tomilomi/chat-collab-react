@@ -1,4 +1,5 @@
 import * as signalR from '@microsoft/signalr';
+import { BASE_URL } from '../config';
 
 let connection = null;
 
@@ -6,7 +7,7 @@ export const startConnection = (token, onLoadMessages, onReceiveMessage, onUpdat
     if (connection) return;
 
     connection = new signalR.HubConnectionBuilder()
-        .withUrl('http://localhost:5135/chathub', {
+        .withUrl(`${BASE_URL}/chathub`, {
             accessTokenFactory: () => token
         })
         .build();
@@ -55,5 +56,9 @@ export const kickUser = (userId) => {
     connection.invoke('KickUser', userId);
 };
 
+
+export const loadMoreMessages = (page) => {
+    connection.invoke('LoadMessages', page);
+};
 
 

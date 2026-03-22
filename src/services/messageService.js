@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { BASE_URL } from '../config';
 
-const BASE_URL = 'http://localhost:5135/api/message';
+const API_URL = `${BASE_URL}/api/message`;
 
 export const deleteMessage = (messageId, token) => {
-    return axios.delete(`${BASE_URL}/${messageId}`, {
+    return axios.delete(`${API_URL}/${messageId}`, {
         headers: { Authorization: `Bearer ${token}` }
     });
 };

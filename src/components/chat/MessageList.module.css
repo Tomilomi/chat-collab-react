@@ -6,3 +6,18 @@
     flex-direction: column;
     gap: 8px;
 }
+
+.loadMore {
+    font-family: 'Departure Mono', monospace;
+    font-size: 14px;
+    color: #3a2198;
+    text-align: center;
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px dashed #3b2d6b;
+    margin-bottom: 8px;
+}
+
+.loadMore:hover {
+    color: #241944;
+}

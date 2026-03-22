@@ -154,3 +154,7 @@
 .error::before {
     content: '> ';
 }
+
+.avatarCurrent {
+    border-color: #4ade80;
+}

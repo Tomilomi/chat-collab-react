@@ -4,24 +4,29 @@ import { useAuth } from "../hooks/useAuth";
 import * as userService from "../services/userService";
 import * as pictureService from "../services/pictureService";
 import styles from "./Profile.module.css";
+import { BASE_URL } from "../config";
 
-const BASE_URL = "http://localhost:5135";
 
 export default function Profile() {
   const { user, token, login } = useAuth();
-
   const [username, setUsername] = useState(user?.username || "");
   const [password, setPassword] = useState("");
   const [pictures, setPictures] = useState([]);
   const [selectedPictureId, setSelectedPictureId] = useState(null);
+  const [currentPictureId, setCurrentPictureId] = useState(null);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
     pictureService.getPictures(token).then((res) => {
       setPictures(res.data);
+      const current = res.data.find((p) => p.url === user?.pictureUrl);
+      if (current) {
+        setCurrentPictureId(current.id);
+        setSelectedPictureId(current.id);
+      }
     });
-  }, [token]);
+  }, [token, user]);
 
   const handleSubmit = async () => {
     try {
@@ -31,7 +36,8 @@ export default function Profile() {
       const data = {};
       if (username && username !== user?.username) data.username = username;
       if (password) data.password = password;
-      if (selectedPictureId) data.pictureId = selectedPictureId;
+      if (selectedPictureId && selectedPictureId !== currentPictureId)
+        data.pictureId = selectedPictureId;
 
       if (Object.keys(data).length === 0) {
         setError("No changes to save.");
@@ -39,10 +45,10 @@ export default function Profile() {
       }
 
       await userService.updateMe(data, token);
-
       const me = await userService.getMe(token);
       login(token, me.data);
 
+      setCurrentPictureId(selectedPictureId);
       setSuccess("Profile updated successfully.");
       setPassword("");
     } catch {
@@ -82,7 +88,7 @@ export default function Profile() {
               {pictures.map((pic) => (
                 <div
                   key={pic.id}
-                  className={`${styles.avatarOption} ${selectedPictureId === pic.id ? styles.selected : ""}`}
+                  className={`${styles.avatarOption} ${selectedPictureId === pic.id ? styles.selected : ""} ${pic.id === currentPictureId && selectedPictureId !== pic.id ? styles.avatarCurrent : ""}`}
                   onClick={() => setSelectedPictureId(pic.id)}
                 >
                   <img src={`${BASE_URL}${pic.url}`} alt="avatar" />
