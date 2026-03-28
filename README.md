@@ -1,4 +1,4 @@
-# chat-collab
+# chat-collab.
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat&logo=react&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-6-646CFF?style=flat&logo=vite&logoColor=white)
