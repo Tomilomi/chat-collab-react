@@ -25,7 +25,11 @@ Frontend de un chat en tiempo real, hecho como proyecto de aprendizaje para expl
 - Perfil de usuario con cambio de avatar, username y contraseña
 - Actualizacion en tiempo real del avatar y username en mensajes anteriores
 - Efecto CRT global con scanlines
-
+## Preview
+![login](./assets/login.png)
+![chat](./assets/chathub.png)
+![profile](./assets/profile.png)
+![moderation](./assets/moderation.png)
 ## Getting started
 ```bash
 git clone https://github.com/Tomilomi/chat-collab-react
